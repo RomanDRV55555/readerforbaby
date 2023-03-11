@@ -1,24 +1,78 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import getSeparatedString from './components/getSeparatedString';
 
 function App() {
+
+  const [stringForSeparate, setStringForSeparate] = useState('');
+
+  function GetArrWords(strForProcessing = '') {
+
+    const newArrWords = [''];
+    strForProcessing.split(' ').forEach(
+      (el) => {
+        getSeparatedString(el).split('-').forEach((els,j,curArr) => {
+          newArrWords.push(els);
+          if (j < (curArr.length -1)){
+            newArrWords.push('-')
+          }
+        })
+        newArrWords.push('  ');
+      });
+      
+
+    // console.log(
+    //   newArrWords.map(el => el.split('-')).flat().forEach((el, i) => {
+    //     el = `<mark key={i}> {el} </mark>`
+    //   })
+    // );
+
+    return (<p> 
+      {newArrWords.map((element, i) => { return <b key={i} > {element} </b> })}
+    </p>);
+
+  };
+
+
+
+
+  // <tbody>
+  //                         {arrForDisp.map((element, i) => { return <Contact key={i} contact={element}> </Contact> })}
+  //                     </tbody>
+
+  //     return (
+  //       <div>
+  //         {
+  //           `<p> ${strForProcessing.split(' ').forEach(
+  //             (el) => {
+  //               el = getSeparatedString(el);
+
+  //             }
+  //           )}
+  //         </p>`}
+
+  //       </div>
+  //     );
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <label>INPUT</label>
+        <textarea onChange={event => {
+          setStringForSeparate(event.target.value)
+        }
+        }></textarea>
+      </div>
+
+      <div style={{ display: "flex" }}>
+        <label style={{ fontSize: "65px" }} >
+          {
+            GetArrWords(stringForSeparate)
+          }
+        </label>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,13 @@
+b{
+  font-size: 48px;
+  background-color: aliceblue;
+}
+
+b:hover{
+  background-color: #61dafb;
+  font-size: 56px;
+}
+
 .App {
   text-align: center;
 }
